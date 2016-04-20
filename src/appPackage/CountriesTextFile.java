@@ -6,12 +6,13 @@ import java.nio.file.Paths;
 
 public class CountriesTextFile {
 
+	static String userCountry = "error";
+
 	public static void addCountry() {
-		
+
 		Path countriesPath = Paths.get("countries.txt");
 		File countriesFile = countriesPath.toFile();
 		System.out.print("Enter a country name: ");
-		String userCountry = "Canada";
 
 		try {
 			userCountry = validator.getValidString("[a-z A-Z]+", 30);
@@ -29,7 +30,7 @@ public class CountriesTextFile {
 			while (line != null) {
 				if (!line.equals("")) {
 					out.append(line + "\n");
-					line = in.readLine(); // read another line
+					line = in.readLine();
 				} else {
 					break;
 				}
@@ -57,7 +58,7 @@ public class CountriesTextFile {
 			FileReader r = new FileReader(countriesFile);
 			BufferedReader in = new BufferedReader(r);
 			String line = in.readLine();
-			while (line != null)  {
+			while (line != null) {
 				if (!line.equals(""))
 					System.out.println(line);
 				line = in.readLine();
@@ -69,8 +70,52 @@ public class CountriesTextFile {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void deleteCountry() {
-		
+		Path countriesPath = Paths.get("countries.txt");
+		File countriesFile = countriesPath.toFile();
+		System.out.print("Enter a country name: ");
+
+		try {
+			userCountry = validator.getValidString("[a-z A-Z]+", 30);
+		} catch (Exception e) {
+			// catches all exceptions and prints
+
+			e.printStackTrace();
+		}
+
+		try {
+			FileReader read = new FileReader(countriesFile);
+			BufferedReader in = new BufferedReader(read);
+			String line = in.readLine();
+			FileWriter out = new FileWriter(countriesFile);
+			
+			while (line != null) {
+				if (!line.equals("") && !line.equalsIgnoreCase(userCountry)) {
+					out.append(line + "\n");
+					line = in.readLine();
+				} else {
+					line = in.readLine();
+					continue;
+				}
+			}
+			
+			out.close();
+			in.close();
+
+		} catch (FileNotFoundException e) {
+			// catches file not found exception and prints
+
+			e.printStackTrace();
+		} catch (IOException e) {
+			// catches file not found exception and prints
+
+			e.printStackTrace();
+		} catch (Exception e) {
+			
+			
+			e.printStackTrace();
+		}
 	}
+
 }

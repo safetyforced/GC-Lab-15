@@ -1,6 +1,6 @@
 package appPackage;
 
-public class Country {
+public class Country {  //Country object contains the country name, primary language, and GDP
 
 	private String name;
 	private String language;
@@ -22,25 +22,12 @@ public class Country {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getLanguage() {
 		return language;
-	}
-
-	public void setLanguage(String language) {
-		this.language = language;
 	}
 
 	public int getGDP() {
 		return GDP;
 	}
-
-	public void setGDP(int gDP) {
-		GDP = gDP;
-	}
-	
 	
 }

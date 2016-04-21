@@ -1,0 +1,4 @@
+Russia,Russian,150
+China,Mandarin,300
+India,Hindi,70
+Canada,English,40

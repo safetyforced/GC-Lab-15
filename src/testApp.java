@@ -7,7 +7,7 @@ import appPackage.validator;
 public class testApp {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		//creates menu and runs appropriate methods from class files based on selections
 
 		int selection;
 		int index = 0;
@@ -19,7 +19,7 @@ public class testApp {
 			System.out.println("1 - See the list of countries \n2 - Add a country \n3 - Remove Country \n4 - Exit\n");
 			System.out.print("Enter a menu number: ");
 
-			selection = validator.getValidInt(1, 4);
+			selection = validator.getValidInt(1, 4); // accept user menu selection, params set min and max respectively
 
 			if (selection == 1) {
 				CountriesTextFile.readCountry();

@@ -1,4 +1,7 @@
+import java.util.ArrayList;
+
 import appPackage.CountriesTextFile;
+import appPackage.Country;
 import appPackage.validator;
 
 public class testApp {
@@ -7,6 +10,8 @@ public class testApp {
 		// TODO Auto-generated method stub
 
 		int selection;
+		int index = 0;
+		ArrayList<Country> country = new ArrayList<>();
 
 		System.out.println("Welcome to the Countries Maintenance Application!\n");
 
@@ -19,7 +24,9 @@ public class testApp {
 			if (selection == 1) {
 				CountriesTextFile.readCountry();
 			} else if (selection == 2) {
-				CountriesTextFile.addCountry();
+				country.add(CountriesTextFile.addCountry());
+				CountriesTextFile.saveStuff(country.get(index));
+				index++;
 			} else if (selection == 3) {
 				CountriesTextFile.deleteCountry();
 			} else if (selection == 4) {

@@ -1,4 +1,5 @@
 package appPackage;
+
 import java.util.*;
 
 public class validator { // Bill's Validator class blatantly stolen for my
@@ -17,12 +18,31 @@ public class validator { // Bill's Validator class blatantly stolen for my
 	}
 
 	public static int getValidInt(int min, int max) {
-		int i = readValidInt();
-		while (i < min || i > max) {
-			System.out.print("Please enter a number within range! (" + min + "-" + max + "): ");
-			i = readValidInt();
+		try {
+			int i = readValidInt();
+			while (i < min || i > max) {
+				System.out.print("Please enter a number within range! (" + min + "-" + max + "): ");
+				i = readValidInt();
+			}
+			return i;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
 		}
-		return i;
+	}
+
+	public static int getValidInt() {
+		try {
+			int i = readValidInt();
+			while (i < 0 || i > 2147483647) {
+				System.out.print("Please enter a number within range! (0 and 2147483647): ");
+				i = readValidInt();
+			}
+			return i;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	public static String readYorN(String x, String y) {
@@ -45,11 +65,18 @@ public class validator { // Bill's Validator class blatantly stolen for my
 	}
 
 	public static String getValidString(String inputs, int length) {
-		String i = readValidString(length);
-		while (!(i.matches(inputs))) {
-			System.out.print("Please only input the country name with letters: ");
-			i = readValidString(length);
+
+		try {
+			String i = readValidString(length);
+			while (!(i.matches(inputs))) {
+				System.out.print("Please only input the country name with letters: ");
+				i = readValidString(length);
+			}
+			return i;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "error";
 		}
-		return i;
 	}
 }

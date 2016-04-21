@@ -7,20 +7,28 @@ import java.nio.file.Paths;
 public class CountriesTextFile {
 
 	static String userCountry = "error";
+	static String userLanguage = "error";
+	static int userGDP = -1;
+	
+	public static Country addCountry() {
 
-	public static void addCountry() {
+		System.out.print("Enter a country name: ");
+		userCountry = validator.getValidString("[a-z A-Z]+", 300);
+
+		System.out.println("Enter official language:");
+		userLanguage = validator.getValidString("[a-z A-Z]+", 300);
+
+		System.out.println("Enter most recent GDP: ");
+		userGDP = validator.getValidInt();
+
+		Country country = new Country(userCountry, userLanguage, userGDP);
+		return country;
+	}
+
+	public static void saveStuff(Country country) {
 
 		Path countriesPath = Paths.get("countries.txt");
 		File countriesFile = countriesPath.toFile();
-		System.out.print("Enter a country name: ");
-
-		try {
-			userCountry = validator.getValidString("[a-z A-Z]+", 30);
-		} catch (Exception e) {
-			// catches all exceptions and prints
-
-			e.printStackTrace();
-		}
 
 		try {
 			FileReader read = new FileReader(countriesFile);
@@ -35,7 +43,7 @@ public class CountriesTextFile {
 					break;
 				}
 			}
-			out.append(userCountry);
+			out.append(country.getName() + "," + country.getLanguage() + "," + country.getGDP());
 			out.close();
 			in.close();
 
@@ -76,30 +84,28 @@ public class CountriesTextFile {
 		File countriesFile = countriesPath.toFile();
 		System.out.print("Enter a country name: ");
 
-		try {
-			userCountry = validator.getValidString("[a-z A-Z]+", 30);
-		} catch (Exception e) {
-			// catches all exceptions and prints
-
-			e.printStackTrace();
-		}
+			userCountry = validator.getValidString("[a-z A-Z]+", 300);
 
 		try {
 			FileReader read = new FileReader(countriesFile);
 			BufferedReader in = new BufferedReader(read);
 			String line = in.readLine();
+			String[] lineItem = line.split(",");
 			FileWriter out = new FileWriter(countriesFile);
 			
+
 			while (line != null) {
-				if (!line.equals("") && !line.equalsIgnoreCase(userCountry)) {
+				if (!line.equals("") && !lineItem[0].equalsIgnoreCase(userCountry)) {
 					out.append(line + "\n");
 					line = in.readLine();
+					lineItem = line.split(",");
 				} else {
 					line = in.readLine();
+					lineItem = line.split(",");
 					continue;
 				}
 			}
-			
+
 			out.close();
 			in.close();
 
@@ -112,8 +118,7 @@ public class CountriesTextFile {
 
 			e.printStackTrace();
 		} catch (Exception e) {
-			
-			
+
 			e.printStackTrace();
 		}
 	}
